@@ -2,9 +2,7 @@ plugins {
   id 'com.gradle.plugin-publish' version '0.9.7'
   id 'nebula.plugin-plugin' version '5.1.0'
 }
-group 'com.shysteph'
 
-description 'Project plugin for IntelliJ to stabilize your .idea/* configuration files'
 
 contacts {
   'stephanie@shysteph.com' {
@@ -25,7 +23,12 @@ dependencies {
 tasks.bintrayUpload.enabled = false
 tasks.artifactoryPublish.enabled = false
 
+group = 'com.shysteph'
+
 pluginBundle {
+  website = 'https://github.com/shysteph/intellij-stabilizer'
+  vcsUrl = 'https://github.com/shysteph/intellij-stabilizer.git'
+  description = 'Project plugin for IntelliJ to stabilize your .idea/* configuration files'
   plugins {
     intellijStabilizer {
       id = 'com.shysteph.intellij-stabilizer'
