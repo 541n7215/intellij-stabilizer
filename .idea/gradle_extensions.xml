@@ -19,6 +19,8 @@
             <ext name="scminfo" type="nebula.plugin.info.scm.ScmInfoExtension" />
             <ext name="ciinfo" type="nebula.plugin.info.ci.ContinuousIntegrationInfoExtension" />
             <ext name="publishing" type="org.gradle.api.publish.internal.DefaultPublishingExtension" />
+            <ext name="release" type="org.ajoberstar.gradle.git.release.base.ReleasePluginExtension" />
+            <ext name="nebulaRelease" type="nebula.plugin.release.ReleaseExtension" />
             <ext name="bintray" type="com.jfrog.bintray.gradle.BintrayExtension" />
             <prop name="bitbucketPassword" />
             <prop name="optional" type="groovy.lang.Closure" />
@@ -32,10 +34,13 @@
             <prop name="nebulaInfoDependencies" type="java.util.LinkedHashMap" />
             <prop name="key" />
             <prop name="contacts" type="groovy.lang.Closure" />
+            <task name="prepare">Verifies that the project could be released.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="projects" type="org.gradle.api.tasks.diagnostics.ProjectReportTask">Displays the sub-projects of root project 'intellij-stabilizer'.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
+            <task name="release">Releases this project.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="bintrayUpload" type="com.jfrog.bintray.gradle.BintrayUploadTask">Publishes artifacts to bintray.com.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
             <task name="integTestClasses">Assembles integ test classes.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="wrapper" type="org.gradle.api.tasks.wrapper.Wrapper">Generates Gradle wrapper files. [incubating]&lt;p&gt;&lt;i&gt;Task group: Build Setup&lt;i&gt;</task>
+            <task name="releaseCheck" type="nebula.plugin.release.ReleaseCheck">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
             <task name="publishPlugins" type="com.gradle.publish.PublishTask">Publishes this plugin to the Gradle Plugin portal.&lt;p&gt;&lt;i&gt;Task group: Plugin Portal&lt;i&gt;</task>
             <task name="publishPluginJar" type="org.gradle.api.tasks.bundling.Jar">Assembles a jar archive containing the main source code.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="jar" type="org.gradle.api.tasks.bundling.Jar">Assembles a jar archive containing the main classes.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
@@ -57,8 +62,10 @@
             <task name="dependencies" type="org.gradle.api.tasks.diagnostics.DependencyReportTask">Displays all dependencies declared in root project 'intellij-stabilizer'.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
             <task name="processTestResources" type="org.gradle.language.jvm.tasks.ProcessResources">Processes test resources.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="buildNeeded">Assembles and tests this project and all projects it depends on.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
+            <task name="final">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
             <task name="ideaProject" type="org.gradle.plugins.ide.idea.GenerateIdeaProject">Generates IDEA project file (IPR)&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="saveLock" type="nebula.plugin.dependencylock.tasks.SaveLockTask">Move the generated lock file into the project directory&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
+            <task name="snapshot">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
             <task name="artifactoryPublish" type="org.jfrog.gradle.plugin.artifactory.task.ArtifactoryTask">Deploys artifacts + generated build-info metadata to Artifactory,
                                  using project configurations.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
             <task name="components" type="org.gradle.api.reporting.components.ComponentReport">Displays the components produced by root project 'intellij-stabilizer'. [incubating]&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
@@ -76,6 +83,8 @@
             <task name="cleanIdeaModule" type="org.gradle.api.tasks.Delete">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="testClasses">Assembles test classes.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="javadoc" type="org.gradle.api.tasks.javadoc.Javadoc">Generates Javadoc API documentation for the main source code.&lt;p&gt;&lt;i&gt;Task group: documentation&lt;i&gt;</task>
+            <task name="candidate">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
+            <task name="devSnapshot">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
             <task name="compileTestGroovy" type="org.gradle.api.tasks.compile.GroovyCompile">Compiles the test Groovy source.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="ideaModule" type="org.gradle.plugins.ide.idea.GenerateIdeaModule">Generates IDEA module files (IML)&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="publishNebulaPublicationToMavenLocal" type="org.gradle.api.publish.maven.tasks.PublishToMavenLocal">Publishes Maven publication 'nebula' to the local Maven repository.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
