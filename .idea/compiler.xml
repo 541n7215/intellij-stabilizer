@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="idea-configuration-stabilizer_integTest" target="1.7" />
+      <module name="idea-configuration-stabilizer_main" target="1.7" />
+      <module name="idea-configuration-stabilizer_test" target="1.7" />
+      <module name="intellij-stabilizer_integTest" target="1.7" />
+      <module name="intellij-stabilizer_main" target="1.7" />
+      <module name="intellij-stabilizer_test" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
