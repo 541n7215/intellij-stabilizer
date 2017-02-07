@@ -37,8 +37,5 @@ pluginBundle {
       tags = ['idea','intellij','dependencies','libraries','annotations']
     }
   }
-  mavenCoordinates {
-    groupId = "com.shysteph"
-    artifactId = "intellij-stabilizer"
-  }
+  delete mavenCoordinates
 }
