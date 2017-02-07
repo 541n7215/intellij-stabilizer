@@ -20,9 +20,6 @@ repositories {
 dependencies {
   compile 'com.netflix.nebula:nebula-release-plugin:4.1.1'
 
-  testCompile('com.netflix.nebula:nebula-test:4.2.2') {
-      exclude group: 'org.codehaus.groovy'
-  }
 }
 
 pluginBundle {
