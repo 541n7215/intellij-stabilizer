@@ -22,6 +22,9 @@ dependencies {
 
 }
 
+tasks.bintrayUpload.enabled = false
+tasks.artifactoryPublish.enabled = false
+
 pluginBundle {
   plugins {
     intellijStabilizer {
