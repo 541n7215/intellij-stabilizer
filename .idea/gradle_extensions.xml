@@ -9,25 +9,19 @@
             <ext name="defaultArtifacts" type="org.gradle.api.internal.plugins.DefaultArtifactPublicationSet" />
             <ext name="reporting" type="org.gradle.api.reporting.ReportingExtension" />
             <ext name="pluginBundle" type="com.gradle.publish.PluginBundleExtension" />
-            <ext name="groovyRuntime" type="org.gradle.api.tasks.GroovyRuntime" />
-            <ext name="jacoco" type="org.gradle.testing.jacoco.plugins.JacocoPluginExtension" />
-            <ext name="coveralls" type="org.kt3k.gradle.plugin.CoverallsPluginExtension" />
+            <ext name="bintray" type="com.jfrog.bintray.gradle.BintrayExtension" />
             <ext name="contacts" type="nebula.plugin.contacts.ContactsExtension" />
-            <ext name="dependencyLock" type="nebula.plugin.dependencylock.DependencyLockExtension" />
-            <ext name="commitDependencyLock" type="nebula.plugin.dependencylock.DependencyLockCommitExtension" />
             <ext name="facets" type="nebula.core.NamedContainerProperOrder" objectType="nebula.plugin.responsible.TestFacetDefinition" />
             <ext name="scminfo" type="nebula.plugin.info.scm.ScmInfoExtension" />
             <ext name="ciinfo" type="nebula.plugin.info.ci.ContinuousIntegrationInfoExtension" />
             <ext name="publishing" type="org.gradle.api.publish.internal.DefaultPublishingExtension" />
             <ext name="release" type="org.ajoberstar.gradle.git.release.base.ReleasePluginExtension" />
             <ext name="nebulaRelease" type="nebula.plugin.release.ReleaseExtension" />
-            <ext name="bintray" type="com.jfrog.bintray.gradle.BintrayExtension" />
+            <ext name="groovyRuntime" type="org.gradle.api.tasks.GroovyRuntime" />
             <prop name="bitbucketPassword" />
-            <prop name="optional" type="groovy.lang.Closure" />
             <prop name="secret" />
             <prop name="bitbucketUrl" />
             <prop name="nexusUrl" />
-            <prop name="optionalDeps" type="java.util.ArrayList" />
             <prop name="nexusPassword" />
             <prop name="bitbucketUsername" />
             <prop name="nexusUsername" />
@@ -39,7 +33,7 @@
             <task name="release">Releases this project.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="bintrayUpload" type="com.jfrog.bintray.gradle.BintrayUploadTask">Publishes artifacts to bintray.com.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
             <task name="integTestClasses">Assembles integ test classes.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
-            <task name="wrapper" type="org.gradle.api.tasks.wrapper.Wrapper">Generates Gradle wrapper files. [incubating]&lt;p&gt;&lt;i&gt;Task group: Build Setup&lt;i&gt;</task>
+            <task name="wrapper" type="org.gradle.api.tasks.wrapper.Wrapper">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="releaseCheck" type="nebula.plugin.release.ReleaseCheck">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
             <task name="publishPlugins" type="com.gradle.publish.PublishTask">Publishes this plugin to the Gradle Plugin portal.&lt;p&gt;&lt;i&gt;Task group: Plugin Portal&lt;i&gt;</task>
             <task name="publishPluginJar" type="org.gradle.api.tasks.bundling.Jar">Assembles a jar archive containing the main source code.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
@@ -55,19 +49,14 @@
             <task name="compileJava" type="org.gradle.api.tasks.compile.JavaCompile">Compiles main Java source.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="groovydoc" type="org.gradle.api.tasks.javadoc.Groovydoc">Generates Groovydoc API documentation for the main source code.&lt;p&gt;&lt;i&gt;Task group: documentation&lt;i&gt;</task>
             <task name="javadocJar" type="org.gradle.api.tasks.bundling.Jar">&lt;i&gt;Task group: build&lt;i&gt;</task>
-            <task name="generateLock" type="nebula.plugin.dependencylock.tasks.GenerateLockTask">Create a lock file in build/&lt;configured name&gt;&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
             <task name="check">Runs all checks.&lt;p&gt;&lt;i&gt;Task group: verification&lt;i&gt;</task>
             <task name="compileIntegTestGroovy" type="org.gradle.api.tasks.compile.GroovyCompile">Compiles the integTest Groovy source.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
-            <task name="coveralls" type="org.kt3k.gradle.plugin.coveralls.CoverallsTask">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="dependencies" type="org.gradle.api.tasks.diagnostics.DependencyReportTask">Displays all dependencies declared in root project 'intellij-stabilizer'.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
             <task name="processTestResources" type="org.gradle.language.jvm.tasks.ProcessResources">Processes test resources.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="buildNeeded">Assembles and tests this project and all projects it depends on.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="final">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
             <task name="ideaProject" type="org.gradle.plugins.ide.idea.GenerateIdeaProject">Generates IDEA project file (IPR)&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
-            <task name="saveLock" type="nebula.plugin.dependencylock.tasks.SaveLockTask">Move the generated lock file into the project directory&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
             <task name="snapshot">&lt;i&gt;Task group: Nebula Release&lt;i&gt;</task>
-            <task name="artifactoryPublish" type="org.jfrog.gradle.plugin.artifactory.task.ArtifactoryTask">Deploys artifacts + generated build-info metadata to Artifactory,
-                                 using project configurations.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
             <task name="components" type="org.gradle.api.reporting.components.ComponentReport">Displays the components produced by root project 'intellij-stabilizer'. [incubating]&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
             <task name="buildDependents">Assembles and tests this project and all projects that depend on it.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="processIntegTestResources" type="org.gradle.language.jvm.tasks.ProcessResources">Processes integ test resources.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
@@ -77,9 +66,7 @@
             <task name="dependentComponents" type="org.gradle.api.reporting.dependents.DependentComponentsReport">Displays the dependent components of components in root project 'intellij-stabilizer'. [incubating]&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
             <task name="compileIntegTestJava" type="org.gradle.api.tasks.compile.JavaCompile">Compiles integ test Java source.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="buildEnvironment" type="org.gradle.api.tasks.diagnostics.BuildEnvironmentReportTask">Displays all buildscript dependencies declared in root project 'intellij-stabilizer'.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
-            <task name="saveGlobalLock" type="nebula.plugin.dependencylock.tasks.SaveLockTask">Move the generated lock file into the project directory&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
             <task name="login" type="com.gradle.publish.LoginTask">Update the gradle.properties files so this machine can publish to the Gradle Plugin portal.&lt;p&gt;&lt;i&gt;Task group: Plugin Portal&lt;i&gt;</task>
-            <task name="updateLock" type="nebula.plugin.dependencylock.tasks.UpdateLockTask">Apply updates to a preexisting lock file and write to build/&lt;specified name&gt;&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
             <task name="cleanIdeaModule" type="org.gradle.api.tasks.Delete">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="testClasses">Assembles test classes.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="javadoc" type="org.gradle.api.tasks.javadoc.Javadoc">Generates Javadoc API documentation for the main source code.&lt;p&gt;&lt;i&gt;Task group: documentation&lt;i&gt;</task>
@@ -88,13 +75,9 @@
             <task name="compileTestGroovy" type="org.gradle.api.tasks.compile.GroovyCompile">Compiles the test Groovy source.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="ideaModule" type="org.gradle.plugins.ide.idea.GenerateIdeaModule">Generates IDEA module files (IML)&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="publishNebulaPublicationToMavenLocal" type="org.gradle.api.publish.maven.tasks.PublishToMavenLocal">Publishes Maven publication 'nebula' to the local Maven repository.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
-            <task name="updateGlobalLock" type="nebula.plugin.dependencylock.tasks.UpdateLockTask">Apply updates to a preexisting lock file and write to build/&lt;specified name&gt;&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
-            <task name="deleteGlobalLock" type="org.gradle.api.tasks.Delete">&lt;i&gt;Task group: other&lt;i&gt;</task>
-            <task name="deleteLock" type="org.gradle.api.tasks.Delete">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="cleanIdea">Cleans IDEA project files (IML, IPR)&lt;p&gt;&lt;i&gt;Task group: IDE&lt;i&gt;</task>
             <task name="ideaWorkspace" type="org.gradle.plugins.ide.idea.GenerateIdeaWorkspace">Generates an IDEA workspace file (IWS)&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="dependencyInsight" type="org.gradle.api.tasks.diagnostics.DependencyInsightReportTask">Displays the insight into a specific dependency in root project 'intellij-stabilizer'.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
-            <task name="jacocoTestReport" type="org.gradle.testing.jacoco.tasks.JacocoReport">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="assemble">Assembles the outputs of this project.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="clean" type="org.gradle.api.tasks.Delete">Deletes the build directory.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
             <task name="writeManifestProperties" type="nebula.plugin.info.reporting.InfoPropertiesFile">&lt;i&gt;Task group: other&lt;i&gt;</task>
@@ -102,7 +85,6 @@
             <task name="cleanIdeaProject" type="org.gradle.api.tasks.Delete">&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="help" type="org.gradle.configuration.Help">Displays a help message.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
             <task name="build">Assembles and tests this project.&lt;p&gt;&lt;i&gt;Task group: build&lt;i&gt;</task>
-            <task name="generateGlobalLock" type="nebula.plugin.dependencylock.tasks.GenerateLockTask">Create a lock file in build/&lt;configured name&gt;&lt;p&gt;&lt;i&gt;Task group: Locking&lt;i&gt;</task>
             <task name="publish">Publishes all publications produced by this project.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
             <task name="publishToMavenLocal">Publishes all Maven publications produced by this project to the local Maven cache.&lt;p&gt;&lt;i&gt;Task group: publishing&lt;i&gt;</task>
             <task name="integrationTest" type="org.gradle.api.tasks.testing.Test">Runs the integTest tests&lt;p&gt;&lt;i&gt;Task group: verification&lt;i&gt;</task>
@@ -118,9 +100,6 @@
             <conf name="integTestCompileClasspath" visible="false">Compile classpath for source set 'integ test'.</conf>
             <conf name="integTestCompileOnly" visible="false">Compile dependencies for source set 'integ test'.</conf>
             <conf name="integTestRuntime" visible="false">Runtime dependencies for source set 'integ test'.</conf>
-            <conf name="jacocoAgent" visible="false">The Jacoco agent to use to get coverage data.</conf>
-            <conf name="jacocoAnt" visible="false">The Jacoco ant tasks to use to get execute Gradle tasks.</conf>
-            <conf name="provided">much like compile, but indicates that you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive.</conf>
             <conf name="runtime" visible="false">Runtime dependencies for source set 'main'.</conf>
             <conf name="testCompile" visible="false">Dependencies for source set 'test'.</conf>
             <conf name="testCompileClasspath" visible="false">Compile classpath for source set 'test'.</conf>

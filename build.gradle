@@ -1,8 +1,56 @@
 plugins {
   id 'com.gradle.plugin-publish' version '0.9.7'
-  id 'nebula.plugin-plugin' version '5.1.0'
+  id 'com.jfrog.bintray' version '1.7.3'
+
+  id 'nebula.contacts' version '3.0.1'
+  id 'nebula.facet' version '3.3.0'
+  id 'nebula.info' version '3.5.0'
+  id 'nebula.javadoc-jar' version '4.9.1'
+  id 'nebula.maven-apache-license' version '4.9.1'
+  id 'nebula.maven-publish' version '4.9.1'
+  id 'nebula.nebula-release' version '4.0.1'
+  id 'nebula.source-jar' version '4.9.1'
+  id 'nebula.integtest' version '3.3.0'
 }
 
+apply plugin: 'groovy'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.3'
+}
+
+bintray {
+  def bintrayUser = project.gradle.properties.bintrayUser
+  def bintrayKey = project.gradle.properties.bintrayKey
+  def sonatypeUsername = project.gradle.properties.ossrhUsername
+  def sonatypePassword = project.gradle.properties.ossrhPassword
+  user = bintrayUser
+  key = bintrayKey
+  publish = true
+  publications = ['nebula']
+  pkg {
+    version {
+      name = project.getVersion()
+      vcsTag = "v${project.getVersion()}"
+      gpg {
+        sign = true
+      }
+      mavenCentralSync {
+        user = sonatypeUsername
+        password = sonatypePassword
+      }
+    }
+
+    publicDownloadNumbers = true
+
+    desc = project.description
+    name = project.name
+
+    licenses = ['Apache-2.0']
+
+    repo = 'gradle-plugins'
+  }
+}
 
 contacts {
   'stephanie@shysteph.com' {
@@ -12,23 +60,53 @@ contacts {
 }
 
 repositories {
-  jcenter()
+  maven { url 'https://plugins.gradle.org/m2/' }
 }
 
 dependencies {
+  compile gradleApi()
+  compile localGroovy()
+
   compile 'com.netflix.nebula:nebula-release-plugin:4.1.1'
 
+  testCompile('com.netflix.nebula:nebula-test:5.0.0') {
+    exclude group: 'org.codehaus.groovy'
+  }
 }
 
-tasks.bintrayUpload.enabled = false
-tasks.artifactoryPublish.enabled = false
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+gradle.taskGraph.whenReady { graph ->
+  tasks.bintrayUpload.onlyIf {
+    graph.hasTask(':final') || graph.hasTask(':candidate')
+  }
+//  tasks.artifactoryPublish.onlyIf {
+//    graph.hasTask(':snapshot') || graph.hasTask(':devSnapshot')
+//  }
+}
+
+gradle.taskGraph.whenReady { graph ->
+  tasks.publishPlugins.onlyIf {
+    graph.hasTask(':final')
+  }
+}
+
+tasks.publishPlugins.dependsOn tasks.check
+
+//tasks.artifactoryPublish.dependsOn tasks.check
+tasks.bintrayUpload.dependsOn tasks.check
+tasks.bintrayUpload.dependsOn tasks.publishPlugins
+
+description = 'Project plugin for IntelliJ to stabilize your .idea/* configuration files'
 
 group = 'com.shysteph'
 
 pluginBundle {
   website = 'https://github.com/shysteph/intellij-stabilizer'
   vcsUrl = 'https://github.com/shysteph/intellij-stabilizer.git'
-  description = 'Project plugin for IntelliJ to stabilize your .idea/* configuration files'
+  description = project.description
   plugins {
     intellijStabilizer {
       id = 'com.shysteph.intellij-stabilizer'
@@ -38,7 +116,7 @@ pluginBundle {
     }
   }
   mavenCoordinates {
-    groupId = ''
-    artifactId = ''
+    groupId = project.group
+    artifactId = project.name
   }
 }
