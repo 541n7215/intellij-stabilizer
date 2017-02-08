@@ -20,14 +20,21 @@
             <ext name="groovyRuntime" type="org.gradle.api.tasks.GroovyRuntime" />
             <prop name="bitbucketPassword" />
             <prop name="secret" />
+            <prop name="//maven" />
+            <prop name="bintrayUser" />
+            <prop name="nexusUsername" />
+            <prop name="key" />
+            <prop name="ossrhUsername" />
             <prop name="bitbucketUrl" />
             <prop name="nexusUrl" />
             <prop name="nexusPassword" />
             <prop name="bitbucketUsername" />
-            <prop name="nexusUsername" />
+            <prop name="//gradle" />
+            <prop name="bintrayKey" />
             <prop name="nebulaInfoDependencies" type="java.util.LinkedHashMap" />
-            <prop name="key" />
+            <prop name="ossrhPassword" />
             <prop name="contacts" type="groovy.lang.Closure" />
+            <prop name="//jfrog/artifactory/bintray" />
             <task name="prepare">Verifies that the project could be released.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
             <task name="projects" type="org.gradle.api.tasks.diagnostics.ProjectReportTask">Displays the sub-projects of root project 'intellij-stabilizer'.&lt;p&gt;&lt;i&gt;Task group: help&lt;i&gt;</task>
             <task name="release">Releases this project.&lt;p&gt;&lt;i&gt;Task group: other&lt;i&gt;</task>
