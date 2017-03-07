@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskAction
 class StabilizeTask extends DefaultTask {
   @Delegate
   @Nested
-  StabilizerExtension extension
+  StabilizeConfig config
 
 
   @SuppressWarnings("GroovyUnusedDeclaration")

@@ -16,7 +16,8 @@ plugins {
 apply plugin: 'groovy'
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.3'
+  gradleVersion = '3.4'
+  distributionType = 'ALL'
 }
 
 bintray {

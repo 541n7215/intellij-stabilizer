@@ -6,7 +6,7 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFiles
 
-class StabilizerExtension {
+class StabilizeConfig {
   @InputFiles
   @OutputFiles
   FileCollection moduleFiles
@@ -22,4 +22,20 @@ class StabilizerExtension {
   @Input
   @Optional
   String annotationsUrl = 'file://$PROJECT_DIR$/annotations'
+
+  def moduleFiles(FileCollection files) {
+    moduleFiles.add(files)
+  }
+
+  def libraryFiles(FileCollection files) {
+  libraryFiles.add(files)
+  }
+
+  def gradleExtensionFiles(FileCollection files) {
+    gradleExtensionFiles.add(files)
+  }
+
+  def annotationsUrl(String url) {
+    annotationsUrl = url;
+  }
 }

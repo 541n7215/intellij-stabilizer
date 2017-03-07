@@ -5,7 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 
-class StabilizerPlugin implements Plugin<Project> {
+class StabilizePlugin implements Plugin<Project> {
   static final String EXTENSION_NAME = 'stabilize'
   static final String TASK_NAME = 'stabilize'
 
@@ -16,10 +16,10 @@ class StabilizerPlugin implements Plugin<Project> {
       this.project = project
 
 
-      final StabilizerExtension stabilizeExtension = project.extensions.create(EXTENSION_NAME, StabilizerExtension)
+      final StabilizeConfig config = project.extensions.create(EXTENSION_NAME, StabilizeConfig)
 
       final StabilizeTask stabilizeTask = project.tasks.create(TASK_NAME, StabilizeTask)
-      stabilizeTask.extension = stabilizeExtension
+      stabilizeTask.config = config
       stabilizeTask.description = 'Order dependencies in module files and add external annotation support'
 
       project.plugins.withType(JavaPlugin) {
