@@ -25,7 +25,7 @@ class StabilizeTask extends DefaultTask {
       "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + writer.toString().replaceAll('(\\S)/>', '$1 />') + "\n"
     }
 
-    moduleFiles.each { File file ->
+    moduleFiles.filter { it.exists() }.each { File file ->
       final Node root = new XmlParser().parse(file)
       def oldText = getXml(root)
 
@@ -49,7 +49,7 @@ class StabilizeTask extends DefaultTask {
       }
     }
 
-    libraryFiles.each { File file ->
+    libraryFiles.filter {it.exists()}.each { File file ->
       final Node root = new XmlParser().parse(file)
       def oldText = getXml(root)
 
@@ -74,7 +74,7 @@ class StabilizeTask extends DefaultTask {
       }
     }
 
-    gradleExtensionFiles.each { File file ->
+    gradleExtensionFiles.filter {it.exists() }.each { File file ->
 
       final Node root = new XmlParser().parse(file)
       //use what we would output as an example of unchanged to avoid simple encoding issues

@@ -1,3 +1,16 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.shysteph:intellij-stabilizer:latest.integration'
+  }
+}
+
 plugins {
   id 'com.gradle.plugin-publish' version '0.9.7'
   id 'com.jfrog.bintray' version '1.7.3'
@@ -14,6 +27,7 @@ plugins {
 }
 
 apply plugin: 'groovy'
+apply plugin: 'com.shysteph.intellij-stabilizer'
 
 task wrapper(type: Wrapper) {
   gradleVersion = '3.4'
@@ -96,6 +110,7 @@ gradle.taskGraph.whenReady { graph ->
 }
 
 tasks.publishPlugins.dependsOn tasks.check
+tasks.publishPlugins.dependsOn tasks.stabilize
 
 //tasks.artifactoryPublish.dependsOn tasks.check
 tasks.bintrayUpload.dependsOn tasks.check

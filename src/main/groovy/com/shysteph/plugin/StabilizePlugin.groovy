@@ -16,7 +16,7 @@ class StabilizePlugin implements Plugin<Project> {
       this.project = project
 
 
-      final StabilizeConfig config = project.extensions.create(EXTENSION_NAME, StabilizeConfig)
+      final StabilizeConfig config = project.extensions.create(EXTENSION_NAME, StabilizeConfig, project)
 
       final StabilizeTask stabilizeTask = project.tasks.create(TASK_NAME, StabilizeTask)
       stabilizeTask.config = config

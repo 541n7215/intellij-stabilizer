@@ -5,7 +5,7 @@ Orders dependencies in your .idea/module/.iml files and configure dependencies t
 ## Code Example
 
 plugins {
-  id 'com.shysteph.intellij-stabilizer' version '1.5.0'
+  id 'com.shysteph.intellij-stabilizer' version '1.6.0'
 }
   
 ## Motivation
